@@ -94,20 +94,20 @@ config PM_STD_PARTITION
 	default ""
 	---help---
 	  The default resume partition is the partition that the suspend-
-	  to-disk implementation will look for a suspended disk image. 
+	  to-disk implementation will look for a suspended disk image.
 
-	  The partition specified here will be different for almost every user. 
+	  The partition specified here will be different for almost every user.
 	  It should be a valid swap partition (at least for now) that is turned
-	  on before suspending. 
+	  on before suspending.
 
 	  The partition specified can be overridden by specifying:
 
-		resume=/dev/<other device> 
+		resume=/dev/<other device>
 
-	  which will set the resume partition to the device specified. 
+	  which will set the resume partition to the device specified.
 
 	  Note there is currently not a way to specify which device to save the
-	  suspended image to. It will simply pick the first available swap 
+	  suspended image to. It will simply pick the first available swap
 	  device.
 
 config PM_SLEEP
@@ -335,3 +335,22 @@ config SUSPEND_TIME
 	  Prints the time spent in suspend in the kernel log, and
 	  keeps statistics on the time spent in suspend in
 	  /sys/kernel/debug/suspend_time
+
+config DEDUCE_WAKEUP_REASONS
+	bool
+	default n
+
+config SUSPEND_SKIP_SYNC
+	bool "Skip kernel's sys_sync() on suspend to RAM/standby"
+	depends on SUSPEND
+	depends on EXPERT
+	help
+	  Skip the kernel sys_sync() before freezing user processes.
+	  Some systems prefer not to pay this cost on every invocation
+	  of suspend, or they are content with invoking sync() from
+	  user-space before invoking suspend. Say Y if that's your case.
+
+config	BOEFFLA_WL_BLOCKER
+		bool "Boeffla generic wakelock blocker driver"
+		depends on PM
+		default N
