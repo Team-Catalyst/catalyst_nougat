@@ -75,16 +75,7 @@ int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
 	if (!adreno_idler_active)
 		return 0;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	display_on = is_display_on();
-=======
-	/* Boolean to let us know if the display is on*/
-	bool display_on = is_display_on();
->>>>>>> 79e71e1... adreno_idler: Add display state awareness
-=======
-	display_on = is_display_on();
->>>>>>> 6d930a1... adreno_idler: Declare display_on correctly
 
 	if (stats.busy_time < idleworkload) {
 		/* busy_time >= idleworkload should be considered as a non-idle workload. */
